@@ -1,7 +1,10 @@
 package utils
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -58,22 +61,30 @@ func (this *FamilyAccount) ADDIncome() {
 	
 	fmt.Print("请选择收入类别 (1.工资 2.奖金 3.投资 4.其他): ")
 	var catChoice int
-	fmt.Scanln(&catChoice)
-	switch catChoice {
-	case 1:
-		category = "工资"
-	case 2:
-		category = "奖金"
-	case 3:
-		category = "投资"
-	case 4:
-		category = "其他"
-	default:
+	_, err = fmt.Scanln(&catChoice)
+	if err != nil {
+		fmt.Println("输入类别无效，默认使用'未分类'")
 		category = "未分类"
+	} else {
+		switch catChoice {
+		case 1:
+			category = "工资"
+		case 2:
+			category = "奖金"
+		case 3:
+			category = "投资"
+		case 4:
+			category = "其他"
+		default:
+			fmt.Println("类别选择无效，使用'未分类'")
+			category = "未分类"
+		}
 	}
 	
 	fmt.Print("请输入收入说明: ")
-	fmt.Scanln(&note)
+	reader := bufio.NewReader(os.Stdin)
+	note, _ = reader.ReadString('\n')
+	note = strings.TrimSpace(note)
 	
 	this.balance += money
 	
@@ -110,26 +121,34 @@ func (this *FamilyAccount) ADDExpense() {
 	
 	fmt.Print("请选择支出类别 (1.餐饮 2.交通 3.购物 4.娱乐 5.医疗 6.其他): ")
 	var catChoice int
-	fmt.Scanln(&catChoice)
-	switch catChoice {
-	case 1:
-		category = "餐饮"
-	case 2:
-		category = "交通"
-	case 3:
-		category = "购物"
-	case 4:
-		category = "娱乐"
-	case 5:
-		category = "医疗"
-	case 6:
-		category = "其他"
-	default:
+	_, err = fmt.Scanln(&catChoice)
+	if err != nil {
+		fmt.Println("输入类别无效，默认使用'未分类'")
 		category = "未分类"
+	} else {
+		switch catChoice {
+		case 1:
+			category = "餐饮"
+		case 2:
+			category = "交通"
+		case 3:
+			category = "购物"
+		case 4:
+			category = "娱乐"
+		case 5:
+			category = "医疗"
+		case 6:
+			category = "其他"
+		default:
+			fmt.Println("类别选择无效，使用'未分类'")
+			category = "未分类"
+		}
 	}
 	
 	fmt.Print("请输入支出说明: ")
-	fmt.Scanln(&note)
+	reader := bufio.NewReader(os.Stdin)
+	note, _ = reader.ReadString('\n')
+	note = strings.TrimSpace(note)
 	
 	this.balance -= money
 	

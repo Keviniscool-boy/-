@@ -267,7 +267,9 @@ func (this *FamilyAccount) ShowMenu() {
 		var choice int
 		_, err := fmt.Scanln(&choice)
 		if err != nil {
-			fmt.Scanln() // 清除输入缓冲
+			// 清除输入缓冲
+			reader := bufio.NewReader(os.Stdin)
+			reader.ReadString('\n')
 			fmt.Println("输入无效，请输入数字！")
 			continue
 		}

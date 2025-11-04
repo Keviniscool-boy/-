@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Study/Project/familyaccount/utils"
-	
+	"familyaccount/utils"
 )
-func main(){
+
+func main() {
 	utils.NewFamilyAccount().ShowMenu()
 }
